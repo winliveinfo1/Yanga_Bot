@@ -14,14 +14,31 @@ from datetime import datetime
 # -------------------------------
 # Configuración
 # -------------------------------
+DISCORD_TOKEN = os.environ.get("DISCORD_TOKEN")
+ADMIN_ROLE_ID = os.environ.get("ADMIN_ROLE_ID")
+WEBHOOK_URL_LOGS = os.environ.get("WEBHOOK_URL_LOGS")
+TOP_ROLE_ID = os.environ.get("TOP_ROLE_ID")
+GUILD_ID_STR = os.environ.get("GUILD_ID")
+
+if not DISCORD_TOKEN:
+    raise ValueError("DISCORD_TOKEN no está configurado")
+if not ADMIN_ROLE_ID:
+    raise ValueError("ADMIN_ROLE_ID no está configurado")
+if not WEBHOOK_URL_LOGS:
+    raise ValueError("WEBHOOK_URL_LOGS no está configurado")
+if not TOP_ROLE_ID:
+    raise ValueError("TOP_ROLE_ID no está configurado")
+if not GUILD_ID_STR:
+    raise ValueError("GUILD_ID no está configurado")
+
 config = {
-    "token": os.environ.get("DISCORD_TOKEN"),
-    "admin_roles": [int(os.environ.get("ADMIN_ROLE_ID"))],
-    "webhook_url_logs": os.environ.get("WEBHOOK_URL_LOGS"),
-    "top_role_id": int(os.environ.get("TOP_ROLE_ID"))
+    "token": DISCORD_TOKEN,
+    "admin_roles": [int(ADMIN_ROLE_ID)],
+    "webhook_url_logs": WEBHOOK_URL_LOGS,
+    "top_role_id": int(TOP_ROLE_ID)
 }
 
-GUILD_ID = int(os.environ.get("GUILD_ID"))
+GUILD_ID = int(GUILD_ID_STR)
 work_cooldowns = {}
 
 # -------------------------------
