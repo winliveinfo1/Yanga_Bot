@@ -524,8 +524,11 @@ async def update_top_role(guild: discord.Guild):
 # -------------------------------
 bot = YangaBot()
 
+from database import init_db
+
 @bot.event
 async def on_ready():
+    await init_db()
     print(f"✅ Bot conectado como {bot.user}")
     # Probar webhook solo al iniciar
     async with aiohttp.ClientSession() as session:
